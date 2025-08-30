@@ -1,0 +1,35 @@
+name: Deploy Branch
+
+on:
+  push:
+    branches:
+      - main # This workflow will run on pushes to the 'main' branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # This line is needed to check out the 'deploy' branch to publish to it later.
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # You can change this to a different Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to deploy branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build # Specifies the directory to be deployed
+          publish_branch: deploy # Sets the target branch for the deployment
+          keep_files: false # Cleans the deploy branch before pushing new files
