@@ -1,9 +1,14 @@
-name: Deploy Branch
+name: Deploy to deploy branch
 
 on:
   push:
     branches:
       - main # This workflow will run on pushes to the 'main' branch
+
+# The permissions key is added to grant write access to the GITHUB_TOKEN
+permissions:
+  contents: write
+  pages: write
 
 jobs:
   build-and-deploy:
