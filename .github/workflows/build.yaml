@@ -31,13 +31,10 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Verify build directory contents
-        run: ls -al ./build
-
       - name: Deploy to deploy branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build # Specifies the directory to be deployed
+          publish_dir: ./dist # Specifies the directory to be deployed
           publish_branch: deploy # Sets the target branch for the deployment
           keep_files: false # Cleans the deploy branch before pushing new files
