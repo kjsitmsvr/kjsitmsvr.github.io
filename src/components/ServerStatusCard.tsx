@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { AlertTriangle, Server, LogIn, Play, Clock, Copy, Check, Globe, Shield } from "lucide-react";
+import { AlertTriangle, Server, LogIn, Play, Clock, Copy, Check, Globe, Shield, RefreshCcw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export const ServerStatusCard = () => {
@@ -47,16 +47,22 @@ export const ServerStatusCard = () => {
       action: "navigate"
     },
     {
-      icon: <Play className="w-5 h-5" />,
-      title: "Execute Server Start",
-      description: "Click the 'Start Server' button to initiate restart sequence",
-      action: "start"
+      icon: <RefreshCcw className="w-5 h-5" />, // Unique icon for restore step
+      title: "Restore server from 'limbo' by joining queue",
+      description: "If your server is in limbo, click 'Join Queue' to restore availability.",
+      action: "queue"
     },
     {
       icon: <Clock className="w-5 h-5" />,
       title: "Allow Startup Time",
       description: "Wait 3-5 minutes for complete server initialization",
       action: "wait"
+    },
+    {
+      icon: <Play className="w-5 h-5" />,
+      title: "Execute Server Start",
+      description: "Click the 'Start Server' button to initiate restart sequence and wait for console to print 'server has been marked as running'",
+      action: "start"
     }
   ];
 
